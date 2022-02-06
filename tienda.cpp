@@ -50,6 +50,18 @@ void Tienda::calcular(float stProducto)
     ui->outTotal->setText("$ " + QString::number(total, 'f', 2));
 }
 
+void Tienda::restablecer()
+{
+    ui->inCedula->setText("");
+    QPalette palette;
+    palette.setColor(QPalette::Base,Qt::white);
+    ui->inCedula->setPalette(palette);
+    ui->inNombre->setText("");
+    ui->inTelefono->setText("");
+    ui->inEmail->setText("");
+    ui->inDireccion->clear();
+}
+
 
 void Tienda::on_inProducto_currentIndexChanged(int index)
 {
@@ -64,9 +76,10 @@ void Tienda::on_inProducto_currentIndexChanged(int index)
 
 void Tienda::on_btnAgregar_released()
 {
-    // Validar que no se agregen productos cpn 0 cantidad
+    // Validar que no se agregen productos con 0 cantidad
     int cantidad = ui->inCantidad->value();
     if (cantidad == 0){
+        QMessageBox::warning(this,"Advertencia","La cantidad es cero.");
         return;
     }
     // Obtener los datos de la GUI
@@ -78,11 +91,26 @@ void Tienda::on_btnAgregar_released()
 
     // Agregar los datos a la tabla
     int fila = ui->outDetalle->rowCount();
-    ui->outDetalle->insertRow(fila);
-    ui->outDetalle->setItem(fila, 0, new QTableWidgetItem(QString::number(cantidad)));
-    ui->outDetalle->setItem(fila, 1, new QTableWidgetItem(p->nombre()));
-    ui->outDetalle->setItem(fila, 2, new QTableWidgetItem(QString::number(p->precio(),'f',2)));
-    ui->outDetalle->setItem(fila, 3, new QTableWidgetItem(QString::number(subtotal,'f',2)));
+    int fila2 = fila-1;
+    int bandera = 0;
+    while(fila2 >= 0 && bandera == 0){
+        if (p->nombre() == ui->outDetalle->item(fila2, 1)->text())
+            bandera = 1;
+        if (bandera == 0)
+            fila2--;
+    }
+    if (bandera == 1){
+        int newCant = cantidad + ui->outDetalle->item(fila2, 0)->text().toInt();
+        float newSubTotal = newCant * p->precio();
+        ui->outDetalle->setItem(fila2, 0, new QTableWidgetItem(QString::number(newCant)));
+        ui->outDetalle->setItem(fila2, 3, new QTableWidgetItem(QString::number(newSubTotal,'f',2)));
+    }else{
+        ui->outDetalle->insertRow(fila);
+        ui->outDetalle->setItem(fila, 0, new QTableWidgetItem(QString::number(cantidad)));
+        ui->outDetalle->setItem(fila, 1, new QTableWidgetItem(p->nombre()));
+        ui->outDetalle->setItem(fila, 2, new QTableWidgetItem(QString::number(p->precio(),'f',2)));
+        ui->outDetalle->setItem(fila, 3, new QTableWidgetItem(QString::number(subtotal,'f',2)));
+    }
 
     // Limpiar datos
     ui->inCantidad->setValue(0);
@@ -93,8 +121,16 @@ void Tienda::on_btnAgregar_released()
 
 }
 
-
-
-
-
+void Tienda::on_cmdCfinal_toggled(bool checked)
+{
+    if (checked){
+        ui->inCedula->setText("9999999999");
+        QPalette palette;
+        palette.setColor(QPalette::Base,Qt::green);
+        ui->inCedula->setPalette(palette);
+        ui->inNombre->setText("Consumidor Final");
+    }else{
+        restablecer();
+    }
+}
 

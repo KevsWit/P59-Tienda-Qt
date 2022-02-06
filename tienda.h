@@ -2,6 +2,8 @@
 #define TIENDA_H
 
 #include <QMainWindow>
+#include <QMessageBox>
+#include <QDebug>
 
 #include "producto.h"
 
@@ -24,13 +26,14 @@ private slots:
 
     void on_btnAgregar_released();
 
+    void on_cmdCfinal_toggled(bool checked);
+
 private:
     Ui::Tienda *ui;
     QList<Producto*> m_productos;
     void cargarProductos();
     float m_subtotal;
-
     void calcular(float stProducto);
-
+    void restablecer();
 };
 #endif // TIENDA_H

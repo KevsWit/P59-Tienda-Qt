@@ -6,6 +6,7 @@
 #include <QDebug>
 
 #include "producto.h"
+#include "factura.h"
 
 #define IVA 12
 
@@ -28,6 +29,8 @@ private slots:
 
     void on_cmdCfinal_toggled(bool checked);
 
+    void on_cmdFacturar_clicked();
+
 private:
     Ui::Tienda *ui;
     QList<Producto*> m_productos;
@@ -35,5 +38,7 @@ private:
     float m_subtotal;
     void calcular(float stProducto);
     void restablecer();
+    bool verificarCedula();
+    bool verificar();
 };
 #endif // TIENDA_H

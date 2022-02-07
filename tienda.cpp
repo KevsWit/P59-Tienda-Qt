@@ -260,3 +260,34 @@ void Tienda::on_cmdFacturar_clicked()
     }
 }
 
+
+void Tienda::on_action_Nuevo_triggered()
+{
+    restablecer();
+    int nRow = ui->outDetalle->rowCount()-1;
+    do{
+        ui->outDetalle->removeRow(nRow);
+        nRow--;
+    }while(nRow >= 0);
+    ui->outSubtotal->setText("0.0");
+    ui->outIva->setText("0.0");
+    ui->outTotal->setText("0.0");
+    if (ui->cmdCfinal->isChecked()){
+        ui->cmdCfinal->setCheckState(Qt::Unchecked);
+    }
+}
+
+
+void Tienda::on_action_Salir_triggered()
+{
+    this->close();
+}
+
+
+void Tienda::on_actionA_cerca_triggered()
+{
+    Acerca *acerca = new Acerca(this);
+    acerca->setVersion(VERSION);
+    acerca->exec();
+}
+

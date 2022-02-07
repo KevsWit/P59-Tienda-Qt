@@ -23,7 +23,7 @@ Factura::~Factura()
 
 void Factura::on_cmdCancelar_clicked()
 {
-    close();
+    this->close();
 }
 
 void Factura::on_cmdImprimir_clicked()
@@ -46,7 +46,7 @@ void Factura::on_cmdImprimir_clicked()
                              "No se pudo guardar el archivo");
     }
     archivo.close();
-    close();
+    this->close();
 }
 
 void Factura::setSubtotal(const QString &newSubtotal)

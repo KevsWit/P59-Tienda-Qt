@@ -19,6 +19,10 @@
   <property name="windowTitle">
    <string>Tienda</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="recursos.qrc">
+    <normaloff>:/shopping-cart-1105049_1280.png</normaloff>:/shopping-cart-1105049_1280.png</iconset>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout_3">
     <item>
@@ -321,9 +325,47 @@ color: rgb(224, 27, 36);</string>
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuA_rchivo">
+    <property name="title">
+     <string>A&amp;rchivo</string>
+    </property>
+    <addaction name="action_Nuevo"/>
+    <addaction name="action_Salir"/>
+   </widget>
+   <widget class="QMenu" name="menuAy_uda">
+    <property name="title">
+     <string>Ay&amp;uda</string>
+    </property>
+    <addaction name="actionA_cerca"/>
+   </widget>
+   <addaction name="menuA_rchivo"/>
+   <addaction name="menuAy_uda"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="action_Nuevo">
+   <property name="text">
+    <string>&amp;Nuevo</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="action_Salir">
+   <property name="text">
+    <string>&amp;Salir</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="actionA_cerca">
+   <property name="text">
+    <string>A&amp;cerca</string>
+   </property>
+  </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="recursos.qrc"/>
+ </resources>
  <connections/>
 </ui>

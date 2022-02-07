@@ -7,8 +7,10 @@
 
 #include "producto.h"
 #include "factura.h"
+#include "acerca.h"
 
 #define IVA 12
+#define VERSION "1.0"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Tienda; }
@@ -30,6 +32,12 @@ private slots:
     void on_cmdCfinal_toggled(bool checked);
 
     void on_cmdFacturar_clicked();
+
+    void on_action_Nuevo_triggered();
+
+    void on_action_Salir_triggered();
+
+    void on_actionA_cerca_triggered();
 
 private:
     Ui::Tienda *ui;

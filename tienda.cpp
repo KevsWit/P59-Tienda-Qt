@@ -64,10 +64,12 @@ void Tienda::restablecer()
 
 bool Tienda::verificarCedula()
 {
+    // Se establece un límite para la cantidad a ser analizada
     long long int ced = ui->inCedula->text().toLongLong();
     if (ced < 100000000 || ced > 3099999999){
         return false;
     }
+    // Creación de un vector de 10 números enteros
     int cednum[10];
     long long int resto;
     int cociente;
@@ -76,6 +78,7 @@ bool Tienda::verificarCedula()
     resto = ced % 10;
     cednum[0] = resto;
     posicion++;
+    // Transformar número a un vector
     while (cociente > 0){
         resto = cociente % 10;
         cednum[posicion] = resto;
@@ -84,6 +87,8 @@ bool Tienda::verificarCedula()
     }
     long long int divi1p = ced/100000000;
     long long int divi2p = ced%1000;
+    // Validación del código de provincia o código especial (30)
+    // Verificación del valor del tercer dígito de la cédula [0-6]
     if (((divi1p >= 1 && divi1p <= 24) || (divi1p == 30)) &&
             (cednum[7] >= 0 && cednum[7] <= 6 && divi2p > 0)){
         int i1 = cednum[1];
@@ -95,6 +100,8 @@ bool Tienda::verificarCedula()
             i5 = 0;
         int ni[]={i5, i4, i3, i2, i1};
         int suma1 = 0;
+        // Se suma el doble de los valores en posiciones impares
+        // Si el doble de estos valores es mayor a nueve se resta a ellos esta misma cantidad
         for (int i = 0; i < 5; i++){
             if (2*ni[i] > 9){
                 suma1 += (2*ni[i] - 9);
@@ -106,14 +113,18 @@ bool Tienda::verificarCedula()
         int j2 = cednum[4];
         int j3 = cednum[6];
         int j4 = cednum[8];
+        // Se suma los valores en posiciones pares
         int suma2 = j1+ j2+ j3+ j4;
+        // Suma de los valores previamente obtenidos
         int suma = suma1 + suma2;
+        // Obtener el dato verificador
         int verificacion1 = 0;
         if (suma % 10 == 0){
             verificacion1 = 0;
         }else{
             verificacion1 = 10-(suma % 10);
         }
+        // Validación del dato verificador y el dígito verificador
         if (verificacion1 == cednum[0]){
             return true;
         }else{

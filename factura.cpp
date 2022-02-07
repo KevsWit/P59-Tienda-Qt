@@ -8,12 +8,12 @@ Factura::Factura(QWidget *parent) :
     ui->setupUi(this);
     this->m_fecha = QDateTime::currentDateTime();
     this->m_ci = 0;
-    this->m_nombre = "Desconocido";
+    this->m_nombre = "";
     this->m_telef = "";
     this->m_email = "";
     this->m_dir = "";
     QString dirHome = QDir::home().absolutePath();
-    ui->outDir->setText("Destino de impresión: " + dirHome);
+    ui->outDir->setText(tr("Destino de impresión: ") + dirHome);
 }
 
 Factura::~Factura()
@@ -42,8 +42,8 @@ void Factura::on_cmdImprimir_clicked()
         salida << "\n";
     }else{
         QMessageBox::warning(this,
-                             "Guardar datos",
-                             "No se pudo guardar el archivo");
+                             tr("Guardar datos"),
+                             tr("No se pudo guardar el archivo"));
     }
     archivo.close();
     this->close();
@@ -101,28 +101,28 @@ void Factura::facturar()
     QString espacios = "";
     QString texto = "MI TIENDA";
     int cant = maxSize-texto.size();
-    for (int i = 0; i < cant/2-2; i++){
+    for (int i = 0; i < cant/2; i++){
         espacios += "   ";
     }
     ui->outFactura->appendPlainText(espacios+texto);
     texto = "RUC: 172130733001";
     espacios = "";
     cant = maxSize-texto.size();
-    for (int i = 0; i < cant/2-1; i++){
+    for (int i = 0; i < cant/2+2; i++){
         espacios += "   ";
     }
     ui->outFactura->appendPlainText(espacios+texto);
     texto = "QUITUMBE";
     espacios = "";
     cant = maxSize-texto.size();
-    for (int i = 0; i < cant/2-3; i++){
+    for (int i = 0; i < cant/2-1; i++){
         espacios += "   ";
     }
     ui->outFactura->appendPlainText(espacios+texto);
-    texto = "OBLIGADO A LLEVAR CONTABILIDAD: SI";
+    texto = tr("OBLIGADO A LLEVAR CONTABILIDAD: SI");
     espacios = "";
     cant = maxSize-texto.size();
-    for (int i = 0; i < cant/2; i++){
+    for (int i = 0; i < cant/2+7; i++){
         espacios += "   ";
     }
     ui->outFactura->appendPlainText(espacios+texto);
@@ -131,15 +131,15 @@ void Factura::facturar()
             QString::number(m_fecha.date().month()) + "/" +
             QString::number(m_fecha.date().year());
     QString time = m_fecha.time().toString();
-    ui->outFactura->appendPlainText("FECHA: " + date + " " + time);
-    ui->outFactura->appendPlainText("CLIENTE: " + m_nombre);
-    ui->outFactura->appendPlainText("CI: " + QString::number(m_ci));
-    ui->outFactura->appendPlainText("TEL: " + m_telef);
-    ui->outFactura->appendPlainText("DIR: " + m_dir);
-    ui->outFactura->appendPlainText("E-MAIL: " + m_email);
+    ui->outFactura->appendPlainText(tr("FECHA: ") + date + " " + time);
+    ui->outFactura->appendPlainText(tr("CLIENTE: ") + m_nombre);
+    ui->outFactura->appendPlainText(tr("CI: ") + QString::number(m_ci));
+    ui->outFactura->appendPlainText(tr("TEL: ") + m_telef);
+    ui->outFactura->appendPlainText(tr("DIR: ") + m_dir);
+    ui->outFactura->appendPlainText(tr("E-MAIL: ") + m_email);
     ui->outFactura->appendPlainText(lineas);
     QString cabecera = "";
-    QString cantidad = "CANT.";
+    QString cantidad = tr("CANT.");
     espacios = "";
     for (int i = 0; i <= cantidad.size()+5; i++){
         espacios += " ";
@@ -147,7 +147,7 @@ void Factura::facturar()
     cabecera += cantidad + espacios;
     cantidad += espacios;
     sizeMaxCant = cantidad.size();
-    QString producto = "PRODUCTO";
+    QString producto = tr("PRODUCTO");
     espacios = "";
     for (int i = 0; i <= producto.size()+25; i++){
         espacios += " ";
@@ -155,7 +155,7 @@ void Factura::facturar()
     cabecera += producto + espacios;
     producto += espacios;
     sizeMaxProd = producto.size();
-    QString pUnitario = "P.UNITARIO";
+    QString pUnitario = tr("P.UNITARIO");
     espacios = "";
     for (int i = 0; i <= pUnitario.size(); i++){
         espacios += " ";
@@ -163,7 +163,7 @@ void Factura::facturar()
     cabecera += pUnitario + espacios;
     pUnitario += espacios;
     sizeMaxPUni = pUnitario.size();
-    QString subTotal = "SUBTOTAL";
+    QString subTotal = tr("SUBTOTAL");
     cabecera += subTotal;
     ui->outFactura->appendPlainText(cabecera);
     ui->outFactura->appendPlainText(lineas);
@@ -174,19 +174,19 @@ void Factura::facturar()
         row = "";
         espacios = "";
         cant = sizeMaxCant - m_tabla->item(cc, 0)->text().size();
-        for (int i = 0; i < cant+6; i++){
+        for (int i = 0; i < cant; i++){
             espacios += " ";
         }
         row += m_tabla->item(cc, 0)->text() + espacios;
         espacios = "";
         cant = sizeMaxProd - m_tabla->item(cc, 1)->text().size();
-        for (int i = 0; i < cant+6; i++){
+        for (int i = 0; i < cant; i++){
             espacios += " ";
         }
         row += m_tabla->item(cc, 1)->text() + espacios;
         espacios = "";
         cant = sizeMaxPUni - m_tabla->item(cc, 2)->text().size();
-        for (int i = 0; i < cant+6; i++){
+        for (int i = 0; i < cant; i++){
             espacios += " ";
         }
         row += m_tabla->item(cc, 2)->text() + espacios;
@@ -196,23 +196,23 @@ void Factura::facturar()
     }while(cc < nRow);
     ui->outFactura->appendPlainText(lineas);
     espacios = "";
-    texto = "Subtotal: " + m_subtotal;
+    texto = tr("Subtotal: ") + m_subtotal;
     cant = maxSize-texto.size();
     for (int i = 0; i < cant+8; i++){
         espacios += "  ";
     }
     ui->outFactura->appendPlainText(espacios + texto);
     espacios = "";
-    texto = "IVA (12%): " + m_iva;
+    texto = tr("IVA (12%): ") + m_iva;
     cant = maxSize-texto.size();
     for (int i = 0; i < cant+8; i++){
         espacios += "  ";
     }
     ui->outFactura->appendPlainText(espacios + texto);
     espacios = "";
-    texto = "TOTAL: " + m_total;
+    texto = tr("TOTAL: ") + m_total;
     cant = maxSize-texto.size();
-    for (int i = 0; i < cant+8; i++){
+    for (int i = 0; i < cant+6; i++){
         espacios += "  ";
     }
     ui->outFactura->appendPlainText(espacios + texto);

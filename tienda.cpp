@@ -15,7 +15,7 @@ Tienda::Tienda(QWidget *parent)
         ui->inProducto->addItem(p->nombre());
     }
     // Configurar cabecera de la tabla
-    QStringList cabecera = {"Cantidad", "Producto", "P. unitario", "Subtotal"};
+    QStringList cabecera = {tr("Cantidad"), tr("Producto"), tr("P. unitario"), tr("Subtotal")};
     ui->outDetalle->setColumnCount(4);
     ui->outDetalle->setHorizontalHeaderLabels(cabecera);
     // Establecer el subtotal a 0
@@ -32,9 +32,9 @@ Tienda::~Tienda()
 void Tienda::cargarProductos()
 {
     // Crear productos "quemados" en el código
-    m_productos.append(new Producto(1, "Leche", 0.80));
-    m_productos.append(new Producto(2, "Pan", 0.15));
-    m_productos.append(new Producto(3, "Queso", 2.50));
+    m_productos.append(new Producto(1, tr("Leche"), 0.80));
+    m_productos.append(new Producto(2, tr("Pan"), 0.15));
+    m_productos.append(new Producto(3, tr("Queso"), 2.50));
     // Podría leerse de una base de datos, de un archivo o incluso de Internet
 }
 
@@ -141,7 +141,7 @@ bool Tienda::verificar()
     QPalette palette;
     palette.setColor(QPalette::Base,Qt::red);
     ui->inCedula->setPalette(palette);
-    QMessageBox::warning(this,"Advertencia","La cédula es inadmisible.");
+    QMessageBox::warning(this,tr("Advertencia"),tr("La cédula es inadmisible."));
     return false;
 }
 
@@ -162,7 +162,7 @@ void Tienda::on_btnAgregar_released()
     // Validar que no se agregen productos con 0 cantidad
     int cantidad = ui->inCantidad->value();
     if (cantidad == 0){
-        QMessageBox::warning(this,"Advertencia","La cantidad es cero.");
+        QMessageBox::warning(this,tr("Advertencia"),tr("La cantidad es cero."));
         return;
     }
     // Obtener los datos de la GUI
@@ -217,7 +217,7 @@ void Tienda::on_cmdCfinal_toggled(bool checked)
         QPalette palette;
         palette.setColor(QPalette::Base,Qt::green);
         ui->inCedula->setPalette(palette);
-        ui->inNombre->setText("Consumidor Final");
+        ui->inNombre->setText(tr("Consumidor Final"));
     }else{
         ui->inCedula->setText("");
         QPalette palette;
@@ -255,8 +255,10 @@ void Tienda::on_cmdFacturar_clicked()
             ui->cmdCfinal->setCheckState(Qt::Unchecked);
         }
     }else{
-        QMessageBox::warning(this,"Advertencia","No hay productos comprados.");
-        return;
+        if (ui->outDetalle->rowCount() == 0){
+            QMessageBox::warning(this,tr("Advertencia"),tr("No hay productos comprados."));
+            return;
+        }
     }
 }
 

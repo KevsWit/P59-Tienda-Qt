@@ -29,7 +29,7 @@
    <iconset resource="recursos.qrc">
     <normaloff>:/shopping-cart-1105049_1280.png</normaloff>:/shopping-cart-1105049_1280.png</iconset>
   </property>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -65,7 +65,7 @@
     <item>
      <widget class="QLabel" name="lblFreepik">
       <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Imagen de &lt;a href=&quot;https://pixabay.com/es/users/mohamed_hassan-5229782/?utm_source=link-attribution&amp;amp;utm_medium=referral&amp;amp;utm_campaign=image&amp;amp;utm_content=3721156&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;mohamed Hassan&lt;/span&gt;&lt;/a&gt; en &lt;a href=&quot;https://pixabay.com/es/?utm_source=link-attribution&amp;amp;utm_medium=referral&amp;amp;utm_campaign=image&amp;amp;utm_content=3721156&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;Pixabay&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Imagen de &lt;a href=&quot;https://pixabay.com/es/users/io-images-1096650/?utm_source=link-attribution&amp;amp;utm_medium=referral&amp;amp;utm_campaign=image&amp;amp;utm_content=1105049&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;IO-Images&lt;/span&gt;&lt;/a&gt; en &lt;a href=&quot;https://pixabay.com/es/?utm_source=link-attribution&amp;amp;utm_medium=referral&amp;amp;utm_campaign=image&amp;amp;utm_content=3721156&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;Pixabay&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
     </item>

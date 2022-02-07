@@ -26,6 +26,11 @@ FORMS += \
     factura.ui \
     tienda.ui
 
+TRANSLATIONS = tienda_en.ts \
+               tienda_fr.ts \
+               tienda_it.ts \
+               tienda_de.ts
+
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin

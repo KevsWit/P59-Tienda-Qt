@@ -1,5 +1,9 @@
 <RCC>
     <qresource prefix="/">
         <file>shopping-cart-1105049_1280.png</file>
+        <file>tienda_de.qm</file>
+        <file>tienda_en.qm</file>
+        <file>tienda_fr.qm</file>
+        <file>tienda_it.qm</file>
     </qresource>
 </RCC>

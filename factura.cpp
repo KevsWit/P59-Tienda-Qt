@@ -73,6 +73,7 @@ void Factura::facturar()
     int nRow = m_tabla->rowCount()-1;
     int cc = 0;
     int maxSize = 0;
+    // Determinamos los tamaños máximos de los strings (items)
     do{
         if (cc == 0){
             sizeMaxCant = m_tabla->item(nRow, 0)->text().size();
@@ -92,11 +93,14 @@ void Factura::facturar()
         }
         nRow--;
     }while(nRow >= 0);
+    // Establecemos un tamaño de string máximo
     maxSize = sizeMaxCant + sizeMaxProd + sizeMaxPUni + sizeMaxST + 35;
+    // Creamos una línea divisora que se utilizará en la impresión
     QString lineas = "";
     for (int i = 0; i <= maxSize; i++){
         lineas += "- ";
     }
+    // Agregamos al widget de salida los datos junto con espacios para moverlos del borde
     ui->outFactura->appendPlainText(lineas);
     QString espacios = "";
     QString texto = "MI TIENDA";
@@ -125,12 +129,14 @@ void Factura::facturar()
     for (int i = 0; i < cant/2+7; i++){
         espacios += "   ";
     }
+    // Obtenemos la fecha del sistema
     ui->outFactura->appendPlainText(espacios+texto);
     ui->outFactura->appendPlainText(lineas);
     QString date = QString::number(m_fecha.date().day()) + "/" +
             QString::number(m_fecha.date().month()) + "/" +
             QString::number(m_fecha.date().year());
     QString time = m_fecha.time().toString();
+    // Agregamos al widget de salida los datos del cliente
     ui->outFactura->appendPlainText(tr("FECHA: ") + date + " " + time);
     ui->outFactura->appendPlainText(tr("CLIENTE: ") + m_nombre);
     ui->outFactura->appendPlainText(tr("CI: ") + QString::number(m_ci));
@@ -138,6 +144,7 @@ void Factura::facturar()
     ui->outFactura->appendPlainText(tr("DIR: ") + m_dir);
     ui->outFactura->appendPlainText(tr("E-MAIL: ") + m_email);
     ui->outFactura->appendPlainText(lineas);
+    // Agregamos al widget la cabecera de la tabla
     QString cabecera = "";
     QString cantidad = tr("CANT.");
     espacios = "";
@@ -169,6 +176,7 @@ void Factura::facturar()
     ui->outFactura->appendPlainText(lineas);
     nRow = m_tabla->rowCount();
     cc = 0;
+    // Agregamos al widget la tabla del detalle de compra
     QString row = "";
     do{
         row = "";
@@ -194,6 +202,7 @@ void Factura::facturar()
         ui->outFactura->appendPlainText(row);
         cc++;
     }while(cc < nRow);
+    // Agregamos al widget los datos finales de la factura
     ui->outFactura->appendPlainText(lineas);
     espacios = "";
     texto = tr("Subtotal: ") + m_subtotal;
